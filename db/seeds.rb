@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+makes=Make.create([{name: 'Bmw'},{name: 'Mercedes'},{name: 'Volvo'},{name: 'Ferrari'}])
