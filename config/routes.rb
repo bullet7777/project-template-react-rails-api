@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get"/me", to: "users#show"
   
   resources :cars
-  #resources :makes, only: [:index]
+  resources :makes, only: [:index]
  
   
   # Routing logic: fallback requests for React Router.

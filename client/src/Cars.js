@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import CarForm from './CarForm'
 import CarsLink from './CarsLink'
+import Makes from './Makes'
 
 const Cars = ({loggedIn}) => {
     const [cars, setCars] = useState([])
     const [error, setError] = useState("")
     const [formFlag, setFormFlag] = useState(false)
     const [addNewError,setNewError]= useState('')
+    const [selectedMake,setSelectedMake]=useState()
 
     useEffect(() => {
         fetch('/cars')
@@ -64,7 +66,9 @@ const Cars = ({loggedIn}) => {
 
     }
    
- 
+ const onMakeSelected=(make)=>{
+setSelectedMake(make)
+ }
    
      
    
@@ -72,12 +76,17 @@ console.log(loggedIn)
 
 if (error === ''){
     if(loggedIn) {
-        const carsList = cars.map(c => <CarsLink key={c.id} car={c} deleteCar={deleteCar}/>)
+        const carsList = cars.filter((c)=>{
+            if (selectedMake){
+                return c.make.id === selectedMake.id
+            }
+            return true
+        }).map(c => <CarsLink key={c.id} car={c} deleteCar={deleteCar}/>)
 
         return (
             <div>
                 <ul>
-                
+                <Makes onClick={onMakeSelected}/>
                     {formFlag ?
                     <div>
                           <CarForm addACar={addCar} />
